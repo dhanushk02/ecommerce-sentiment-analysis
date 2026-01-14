@@ -30,7 +30,7 @@ body {
     padding: 0 20px;
 }
 
-.row {
+.custom-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -111,6 +111,19 @@ nav ul li a:hover {
 .login-hero {
     height: 45vh;
     background: #f8f8f8;
+}
+
+.about-hero {
+    height: 60vh;              /* FIX */
+    display: flex;             /* FIX */
+    align-items: center;       /* FIX */
+    color: white;              /* FIX */
+    background: linear-gradient(
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.7)
+    ),
+    url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a')
+    center/cover no-repeat;
 }
 
 /* ================= CATEGORIES ================= */
