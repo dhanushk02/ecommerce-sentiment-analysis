@@ -1,0 +1,9 @@
+Flask
+gunicorn
+bcrypt
+joblib
+nltk
+scikit-learn
+textblob
+pandas
+numpy
