@@ -1,0 +1,44 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}{{ 'Edit' if product else 'Add' }} Product{% endblock %}
+{% block page_title %}{{ 'Edit Product' if product else 'Add New Product' }}{% endblock %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label class="form-label">Product Name</label>
+    <input type="text" name="name" class="form-control" value="{{ product.name if product else '' }}" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Price</label>
+    <input type="number" name="price" step="0.01" class="form-control" value="{{ product.price if product else '' }}" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select name="category_id" class="form-select" required>
+      {% for cat in categories %}
+      <option value="{{ cat.id }}" {% if product and cat.id == product.category_id %}selected{% endif %}>
+        {{ cat.Category }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea name="description" class="form-control">{{ product.description if product else '' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Image</label>
+    {% if product %}
+      <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" width="100" class="img-thumbnail mb-2"><br>
+    {% endif %}
+    <input type="file" name="image" class="form-control" {% if not product %}required{% endif %}>
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ 'Update' if product else 'Add' }} Product</button>
+  <a href="{{ url_for('AdminProductsList') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

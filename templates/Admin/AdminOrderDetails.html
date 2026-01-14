@@ -1,0 +1,91 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}Order Details{% endblock %}
+{% block page_title %}Order #{{ order.id }} Details{% endblock %}
+
+{% block content %}
+
+<!-- Order Information Card -->
+<div class="card shadow" style="height: auto;">
+    <div class="card-header bg-dark text-white">
+        Order Information
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Order ID</dt>
+            <dd class="col-sm-9">{{ order.id }}</dd>
+
+            <dt class="col-sm-3">Order Date</dt>
+            <dd class="col-sm-9">{{ order.order_date }}</dd>
+
+            <dt class="col-sm-3">Quantity</dt>
+            <dd class="col-sm-9">{{ order.quantity }}</dd>
+
+            <dt class="col-sm-3">Address</dt>
+            <dd class="col-sm-9">{{ order.address }}</dd>
+        </dl>
+    </div>
+</div>
+
+<!-- Status Update Card -->
+<div class="card shadow mt-4">
+    <div class="card-header bg-warning text-dark">
+        Update Order Status
+    </div>
+    <div class="card-body">
+        <form method="post" action="{{ url_for('AdminOrderDetails', id=order.id) }}" class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="status" class="col-form-label">Status:</label>
+            </div>
+            <div class="col-auto">
+                <select name="status" id="status" class="form-select">
+                    {% for s in ['Pending', 'Shipped', 'Delivered', 'Cancelled'] %}
+                        <option value="{{ s }}" {% if order.status == s %}selected{% endif %}>{{ s }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- User Information -->
+<div class="card shadow mt-4">
+    <div class="card-header bg-primary text-white">
+        User Information
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">{{ order.user_name }}</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">{{ order.email }}</dd>
+        </dl>
+    </div>
+</div>
+
+<!-- Product Information -->
+<div class="card shadow mt-4">
+    <div class="card-header bg-success text-white">
+        Product Information
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Product Name</dt>
+            <dd class="col-sm-9">{{ order.product_name }}</dd>
+
+            <dt class="col-sm-3">Price</dt>
+            <dd class="col-sm-9">₹{{ order.price }}</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('AdminOrdersList') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Orders
+    </a>
+</div>
+
+{% endblock %}

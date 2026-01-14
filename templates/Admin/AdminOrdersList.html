@@ -1,0 +1,77 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}Manage Orders{% endblock %}
+{% block page_title %}Order List{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container mb-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+<!-- Status Filter -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <form method="get" action="{{ url_for('AdminOrdersList') }}">
+            <select name="status" class="form-select" onchange="this.form.submit()">
+                <option value="">All Statuses</option>
+                {% for s in statuses %}
+                    <option value="{{ s }}" {% if request.args.get('status') == s %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</div>
+
+<!-- Orders Table -->
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ order.user_name }}</td>
+                <td>{{ order.product_name }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.order_date }}</td>
+               
+                <td>
+                    <a href="{{ url_for('AdminOrderDetails', id=order.id) }}" class="btn btn-info btn-sm" title="View Details">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <!-- Add Delete Button -->
+                    <form method="post" action="{{ url_for('AdminDeleteOrder', id=order.id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this order?');">
+                        <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                
+            </tr>
+            {% else %}
+            <tr><td colspan="8" class="text-center">No orders found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

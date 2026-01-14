@@ -1,0 +1,183 @@
+{% extends "Base.html" %}
+
+{% block content %}
+    <!-- Hero Section with Background Image -->
+    <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat; background-size: cover; background-position: center;">
+        <div class="container">
+            <div class="hero-content">
+                <h1>New Season Arrivals</h1>
+                <p>Discover our latest collection</p>
+                <a href="{{ url_for('UserProductsList') }}" class="btn">Shop Now &#8594;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by Category</h2>
+                <p>Browse our popular categories</p>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="category-card">
+                        <img src="{{ url_for('static', filename='images/slide1.jpg') }}" alt="Men's Fashion">
+                        <div class="category-info">
+                            <h3>Men's Fashion</h3>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="category-card">
+                        <img src="{{ url_for('static', filename='images/slide2.jpg') }}" alt="Women's Fashion">
+                        <div class="category-info">
+                            <h3>Women's Fashion</h3>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="category-card">
+                        <img src="{{ url_for('static', filename='images/slide3.jpg') }}" alt="Electronics">
+                        <div class="category-info">
+                            <h3>Electronics</h3>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="category-card">
+                        <img src="{{ url_for('static', filename='images/slide4.jpg') }}" alt="Home & Living">
+                        <div class="category-info">
+                            <h3>Home & Living</h3>
+                            <a href="#" class="btn">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Deals of the Day Section -->
+<section class="deals-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Deals of the Day</h2>
+            <p>Limited time offers - don't miss out!</p>
+            <div class="timer">
+                <span id="hours">12</span>h 
+                <span id="minutes">45</span>m 
+                <span id="seconds">30</span>s left
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="deal-card">
+                    <div class="deal-badge">50% OFF</div>
+                    <img src="{{ url_for('static', filename='images/deal1.jpg') }}" alt="Daily Deal 1">
+                    <div class="deal-info">
+                        <h3>Mens Wear</h3>
+                        <div class="deal-price">
+                            <span class="old-price">₹799</span>
+                            <span class="new-price">₹399</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                            <span>75% claimed</span>
+                        </div>
+                        <a href="#" class="btn">Grab Deal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="deal-card">
+                    <div class="deal-badge">60% OFF</div>
+                    <img src="{{ url_for('static', filename='images/deal2.jpg') }}" alt="Daily Deal 2">
+                    <div class="deal-info">
+                        <h3>Headset</h3>
+                        <div class="deal-price">
+                            <span class="old-price">₹199</span>
+                            <span class="new-price">₹79</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 50%"></div>
+                            <span>50% claimed</span>
+                        </div>
+                        <a href="#" class="btn">Grab Deal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="deal-card">
+                    <div class="deal-badge">40% OFF</div>
+                    <img src="{{ url_for('static', filename='images/deal3.jpg') }}" alt="Daily Deal 3">
+                    <div class="deal-info">
+                        <h3>Fitness Tracker</h3>
+                        <div class="deal-price">
+                            <span class="old-price">₹149</span>
+                            <span class="new-price">₹89</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                            <span>30% claimed</span>
+                        </div>
+                        <a href="#" class="btn">Grab Deal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Customer Favorites Section -->
+<section class="favorites-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Customer Favorites</h2>
+            <p>Top rated products loved by shoppers</p>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="favorite-card">
+                    <div class="rating-badge">4.9 ★</div>
+                    <img src="{{ url_for('static', filename='images/fav1.jpg') }}" alt="Customer Favorite 1">
+                    <div class="favorite-info">
+                        <h3>Air Max Sneakers</h3>
+                        <p class="reviews">(1,245 reviews)</p>
+                        <div class="price">$129.99</div>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="favorite-card">
+                    <div class="rating-badge">4.8 ★</div>
+                    <img src="{{ url_for('static', filename='images/fav2.jpg') }}" alt="Customer Favorite 2">
+                    <div class="favorite-info">
+                        <h3>Leather Backpack</h3>
+                        <p class="reviews">(892 reviews)</p>
+                        <div class="price">$79.99</div>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="favorite-card">
+                    <div class="rating-badge">5.0 ★</div>
+                    <img src="{{ url_for('static', filename='images/fav3.jpg') }}" alt="Customer Favorite 3">
+                    <div class="favorite-info">
+                        <h3>Blender Pro</h3>
+                        <p class="reviews">(2,103 reviews)</p>
+                        <div class="price">$59.99</div>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

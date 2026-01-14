@@ -1,0 +1,54 @@
+{% extends "User/UserBase.html" %}
+
+{% block title %}User Dashboard{% endblock %}
+{% block page_title %}Dashboard Overview{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <div class="alert-container">
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+
+<div class="card-grid">
+
+    <!-- Registered Users -->
+    <div class="card">
+        <div class="card-title">Products</div>
+        <div class="card-value">1,542</div>
+        <div class="card-growth">
+            <i class="fas fa-users"></i> +5% This Week
+        </div>
+    </div>
+
+    <!-- Placed Orders -->
+    <div class="card">
+        <div class="card-title">Placed Orders</div>
+        <div class="card-value">3</div>
+        
+    </div>
+
+    <!-- Processed Orders -->
+    <div class="card">
+        <div class="card-title">Processed Orders</div>
+        <div class="card-value">2</div>
+       
+    </div>
+
+    <!-- Pending Orders -->
+    <div class="card">
+        <div class="card-title">Pending Orders</div>
+        <div class="card-value">1</div>
+       
+    </div>
+
+</div>
+{% endblock %}

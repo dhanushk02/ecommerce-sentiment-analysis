@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - ShopEase{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you! Reach out with questions, feedback, or just to say hello.</p>
+            <a href="#contact-info" class="btn">Contact Info</a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="categories" id="contact-info">
+    <div class="container">
+        <div class="section-title">
+            <h2>Contact Information</h2>
+            <p>Choose your preferred way to connect with us</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-4">
+                <div class="category-card contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>Rangnath Badwane<br>Davanagere, Karnataka</p>
+                </div>
+            </div>
+            
+            <div class="col-4">
+                <div class="category-card contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>9876543210<br>Mon-Fri: 9am-6pm IST</p>
+                </div>
+            </div>
+            
+            <div class="col-4">
+                <div class="category-card contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>hello@shopease.com<br>support@shopease.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="categories">
+    <div class="container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.0080738035655!2d75.92379731534623!3d14.464723390303982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bba2587e5ecb0fd%3A0x744a9dd6f43a4e3d!2sDavanagere%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+<style>
+    /* Minimal additional styles */
+    .contact-method {
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .contact-icon {
+        background: var(--primary-color);
+        color: white;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 24px;
+    }
+    
+    iframe {
+        margin-top: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}

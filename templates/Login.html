@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Login - ShopEase{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero login-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Welcome Back</h1>
+            <p>Sign in to access your account and continue shopping</p>
+        </div>
+    </div>
+</section>
+
+<!-- Login Section -->
+<section class="categories login-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-3 login-container">
+                <div class="category-card login-card">
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                      <div class="alert-container">
+                        {% for category, message in messages %}
+                          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% endwith %}
+                  
+                    <div class="login-tabs">
+                        <!-- Add condition to dynamically set active tab -->
+                        <button class="login-tab {% if active_tab == 'user' %}active{% endif %}" data-tab="user">User Login</button>
+                        <button class="login-tab {% if active_tab == 'admin' %}active{% endif %}" data-tab="admin">Admin Login</button>
+                    </div>
+
+                    <!-- User Login Form -->
+                    <form class="login-form {% if active_tab == 'user' %}active{% endif %}" id="user-form" action="{{ url_for('userlogin') }}" method="post">
+                        <div class="form-group">
+                            <label for="user-email">Email Address</label>
+                            <input type="email" id="useremail" name="useremail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user-password">Password</label>
+                            <input type="password" id="userpassword" name="userpassword" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember"> Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn login-btn">Sign In</button>
+                        
+                        <div class="signup-link">
+                            Don't have an account? <a href="{{ url_for('register') }}">Sign up</a>
+                        </div>
+                    </form>
+
+                    <!-- Admin Login Form -->
+                    <form class="login-form {% if active_tab == 'admin' %}active{% endif %}" id="admin-form" action="{{ url_for('adminlogin') }}" method="post">
+                        <div class="form-group">
+                            <label for="admin-email">Admin Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn login-btn">Admin Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.login-tab');
+    const forms = document.querySelectorAll('.login-form');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs and forms
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+
+            // Add active class to clicked tab and corresponding form
+            this.classList.add('active');
+            const formId = this.getAttribute('data-tab') + '-form';
+            document.getElementById(formId).classList.add('active');
+        });
+    });
+
+    // Optional: Add form validation logic before submission
+    document.querySelectorAll('.login-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            const email = form.querySelector('input[name="email"]');
+            const password = form.querySelector('input[name="password"]');
+            if (!email.value || !password.value) {
+                event.preventDefault();
+                alert('Both email and password are required!');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

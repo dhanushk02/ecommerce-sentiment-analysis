@@ -1,0 +1,93 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}Manage Products{% endblock %}
+{% block page_title %}Product List{% endblock %}
+
+{% block content %}
+
+<!-- Category Filter & Add Button -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <form method="get" action="{{ url_for('AdminProductsList') }}">
+            <select name="category" class="form-select" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if request.args.get('category') == category.id|string %}selected{% endif %}>
+                        {{ category.Category }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="col-md-8 text-end">
+        <a href="{{ url_for('AdminProductDetails') }}" class="btn btn-success">
+            <i class="fas fa-plus"></i> Add New Product
+        </a>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}"
+                         alt="{{ product.name }}" class="img-thumbnail product-image" width="60"
+                         data-bs-toggle="modal" data-bs-target="#imageModal"
+                         data-img-url="{{ url_for('static', filename='uploads/' ~ product.image) }}">
+                </td>
+                <td>{{ product.name }}</td>
+                <td>₹{{ product.price }}</td>
+                <td>{{ product.category_name }}</td>
+                <td>
+                    <a href="{{ url_for('AdminProductDetails', id=product.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form method="POST" action="{{ url_for('AdminProductDelete', id=product.id) }}"
+                          style="display:inline;" onsubmit="return confirm('Delete this product?')">
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center">No products found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for Enlarged Image -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img src="" id="modalImage" class="img-fluid rounded" alt="Product Image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for Modal -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const modalImage = document.getElementById('modalImage');
+
+    document.querySelectorAll('.product-image').forEach(img => {
+        img.addEventListener('click', () => {
+            modalImage.src = img.getAttribute('data-img-url');
+        });
+    });
+});
+</script>
+
+{% endblock %}
