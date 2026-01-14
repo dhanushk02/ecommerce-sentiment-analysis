@@ -28,11 +28,11 @@ body {
     padding: 0 20px;
 }
 
-/* 🔧 FIXED */
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 30px;
 }
 
 .btn {
@@ -138,7 +138,6 @@ nav ul li a:hover {
     padding: 60px 0;
 }
 
-/* 🔧 FIXED */
 .col-4 {
     flex: 0 0 23%;
     max-width: 23%;
@@ -194,9 +193,63 @@ nav ul li a:hover {
     background: #fff8f8;
 }
 
+.deal-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    overflow: hidden;                
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.deal-card img {
+    width: 100%;
+    height: 250px;                   
+    object-fit: contain;
+    background: #f8f8f8;
+}
+
+.deal-info {
+    padding: 20px;
+}
+
+.deal-card:hover {
+    transform: translateY(-6px);
+}
+
 /* Favorites */
 .favorites-section {
     padding: 80px 0;
+}
+
+.favorite-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    overflow: hidden;               
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.favorite-card img {
+    width: 100%;
+    height: 250px;                  
+    object-fit: contain;            
+    background: #f8f8f8;
+}
+
+.favorite-info {
+    padding: 20px;
+}
+
+.favorite-card:hover {
+    transform: translateY(-6px);
+}
+
+.favorite-card:hover img {
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 
 /* Timeline */
