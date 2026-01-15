@@ -30,11 +30,19 @@ body {
     padding: 0 20px;
 }
 
+/* Updated to ensure centering across all pages */
 .custom-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; 
     gap: 30px;
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
 }
 
 /* ================= BUTTON ================= */
@@ -52,16 +60,15 @@ body {
 
 .btn:hover {
     background: var(--secondary-color);
-    transform: scale(1.05);
 }
 
-/* ================= HEADER ================= */
+/* ================= HEADER & NAV ================= */
 .header {
     background: #fff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.06);
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 1000;
 }
 
 .navbar {
@@ -69,6 +76,29 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin-left: 25px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.navbar ul li a:hover {
+    color: var(--primary-color);
 }
 
 .logo a {
@@ -82,25 +112,6 @@ body {
     color: var(--primary-color);
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 500;
-}
-
-nav ul li a:hover {
-    color: var(--primary-color);
-}
-
 /* ================= HERO ================= */
 .hero {
     height: 80vh;
@@ -108,128 +119,250 @@ nav ul li a:hover {
     align-items: center;
 }
 
-.login-hero {
-    height: 45vh;
-    background: #f8f8f8;
-}
-
 .about-hero {
-    height: 60vh;              /* FIX */
-    display: flex;             /* FIX */
-    align-items: center;       /* FIX */
-    color: white;              /* FIX */
-    background: linear-gradient(
-        rgba(0,0,0,0.7),
-        rgba(0,0,0,0.7)
-    ),
-    url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a')
-    center/cover no-repeat;
+    height: 60vh;
+    color: #fff;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a') center/cover no-repeat;
 }
 
-/* ================= CATEGORIES ================= */
-.categories {
-    padding: 60px 0;
-}
-
+/* ================= COLUMNS ================= */
 .col-4 {
-    flex: 0 0 23%;
-    max-width: 23%;
-    min-width: 250px;
+    flex: 0 1 300px; /* Fixed width for centering stability */
+    max-width: 100%;
+    margin-bottom: 20px;
 }
 
-/* ================= DEALS ================= */
-.deals-section {
-    padding: 80px 0;
-    background: #fff8f8;
+/* ================= HOME PAGE CATEGORY CARDS (SHOP BY CATEGORY) ================= */
+.categories:not(.about-cards) .category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 350px;
 }
 
-.deal-card {
+.categories:not(.about-cards) .category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.categories:not(.about-cards) .category-card:hover img {
+    transform: scale(1.1);
+}
+
+.categories:not(.about-cards) .category-info {
+    position: absolute;
+    bottom: 15px; /* Pushed up slightly from the edge */
+    left: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    backdrop-filter: blur(10px);        /* Frosty blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    color: #fff;
+    z-index: 2;
+}
+
+/* Ensure text inside the glass box is always white and readable */
+.categories:not(.about-cards) .category-info h3,
+.categories:not(.about-cards) .category-info p {
+    color: #fff !important;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ================= HOME PAGE PRODUCT CARDS (DEALS/FAVORITES) ================= */
+.deals-section .col-4, 
+.favorites-section .col-4 {
+    display: flex;
+}
+
+.product-card, .favorite-card, .deal-card {
     background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: transform 0.3s ease;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
-.deal-card img {
+.product-card:hover, .deal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.product-card img, .deal-card img, .favorite-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-card .price, .product-card .btn, .deal-card .btn {
+    margin-top: auto; 
+}
+
+/* ================= ABOUT PAGE CARDS (ALWAYS VISIBLE TEXT) ================= */
+.about-cards .category-card {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.about-cards .category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.about-cards .category-info {
+    position: relative !important;
+    background: #fff !important;
+    color: #333 !important;
+    padding: 20px !important;
+    text-align: center;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.about-cards .category-card img {
     width: 100%;
     height: 250px;
-    object-fit: contain;
-    background: #f8f8f8;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
-.deal-card:hover {
-    transform: translateY(-6px);
-}
-
-/* ================= FAVORITES ================= */
-.favorites-section {
-    padding: 80px 0;
-}
-
-.favorite-card {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+/* ================= CONTACT PAGE ================= */
+.contact-method {
     text-align: center;
-    transition: 0.3s;
+    padding: 30px;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.favorite-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: contain;
+/* ================= TESTIMONIALS ================= */
+.testimonial-card {
+    text-align: center;
+    padding: 30px 20px;
 }
 
-.favorite-card:hover {
-    transform: translateY(-6px);
+.testimonial-text {
+    font-style: italic;
+    color: var(--gray-color);
+    margin: 15px 0;
+    flex-grow: 1;
 }
 
-/* ================= LOGIN ================= */
-.login-section {
-    padding: 80px 0;
+.testimonial-author img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    margin-bottom: 0 !important;
 }
 
-.login-container {
-    max-width: 550px;
-    margin: auto;
+/* ================= LOGIN PAGE STYLING ================= */
+.auth-section {
+    background: var(--light-gray);
+    padding: 60px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-card {
+.auth-card {
     background: #fff;
     padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+    position: relative !important;
+    transform: none !important;
+    bottom: auto !important;
+    display: block !important;
+}
+
+.login-hero {
+    height: 35vh !important; 
+    min-height: 250px;       
 }
 
 .login-tabs {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
 }
 
 .login-tab {
     flex: 1;
-    padding: 10px;
-    background: #eee;
+    padding: 12px 10px;
+    background: none;
     border: none;
     cursor: pointer;
     font-weight: 600;
+    color: var(--gray-color);
+    white-space: nowrap; 
+    font-size: 16px;
 }
 
 .login-tab.active {
-    background: var(--primary-color);
-    color: #fff;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .login-form {
     display: none;
+    flex-direction: column;
 }
 
 .login-form.active {
-    display: block;
+    display: flex !important;
 }
 
-/* ================= FOOTER ================= */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.login-btn {
+    width: 100% !important;
+    margin-top: 10px;
+}
+
+/* ================= SECTIONS & FOOTER ================= */
+.categories, .deals-section, .favorites-section {
+    padding: 80px 0;
+}
+
+.deals-section { background: #fff8f8; }
+
 .footer {
     background: #000;
     color: #fff;
@@ -239,18 +372,14 @@ nav ul li a:hover {
 /* ================= RESPONSIVE ================= */
 @media (max-width: 992px) {
     .col-4 {
-        flex: 0 0 48%;
-        max-width: 48%;
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .col-4 {
-        flex: 0 0 100%;
+        flex: 1 1 100%;
         max-width: 100%;
-    }
-
-    nav ul {
-        flex-direction: column;
     }
 }

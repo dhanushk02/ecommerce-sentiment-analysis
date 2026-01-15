@@ -14,12 +14,11 @@
 </section>
 
 <!-- Login Section -->
-<section class="categories login-section">
+<section class="auth-section login-section">
     <div class="container">
         <div class="custom-row">
-            <div class="col-3 login-container">
-                <div class="category-card login-card">
-
+            <div class="col-4 login-container">
+                <div class="auth-card" id="unique-login-box">
                     {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                       <div class="alert-container">
